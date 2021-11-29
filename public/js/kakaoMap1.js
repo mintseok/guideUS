@@ -265,7 +265,7 @@ function removeAllChildNods(el) {
 // 도로 출력
 async function FetchData() {
     try{
-        await fetch('http://localhost:3000/data/routes_1.txt')
+        await fetch('/data/routes_1.txt')
             .then(response => response.text())
             .then(data => {
                 // Do something with your data                 
