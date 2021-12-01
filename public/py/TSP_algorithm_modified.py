@@ -9,10 +9,10 @@ if __name__ == '__main__':
     # example of print(sys.argv[1:])
     # ['2021-11-27T06:07', '신사동가로수길', '127.022836977184', '37.5211558694563', '60']    
     params = sys.argv[1:]
-    print(params)
+    #print(params)
     startTime_old = sys.argv[1] # 오전: '2021-11-27T05:33',  오후: '2021-11-27T17:34'
     startTime = startTime_old[:4]+startTime_old[5:7]+startTime_old[8:10]+startTime_old[11:13]+startTime_old[14:]
-    print(startTime)
+    #print(startTime)
     destinations = sys.argv[2:] #'신사동가로수길,127.022836977184,37.5211558694563,60'
 
     #이 경우에는 총 6가지가 담겨있어야 함
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     #name, longi, leti, waitTime(초)3
     numOfGap=len(tempInfo)-1#노드간 사이 개수(전체 노드 개수 -1)
     numOfWayPoints=len(tempInfo)-2  #경유지 개수
-    print(numOfGap,numOfWayPoints)
+    #print(numOfGap,numOfWayPoints)
     #################################
     numberOfPermutaion=1    
     for i in range (1,numOfWayPoints+1):
@@ -47,9 +47,9 @@ if __name__ == '__main__':
     pool = []
     for i in range(numOfWayPoints):
         pool.append(str(i+1))       #['1','2','3'] --> 이거로 순열 만들 것임
-    print(pool)
+    #print(pool)
     permuList=list(map(''.join, itertools.permutations(pool))) # numOfWayPoints만큼의 경유지 수로 수열 만들기
-    print(permuList)
+    #print(permuList)
 
 
     def ShowOptimalRoot(ArriveTimeList,tempInfo, permuList):
@@ -117,7 +117,7 @@ if __name__ == '__main__':
                 temp+=1
         #print(lisT[b+11:b+11+temp])
         #출발지에서 도착지까지의 거리 + 도착지에서 보내는 시간을 return 함
-        print('{}~{}까지 걸리는 시간 : {}분'.format(Dename, Arname,int(lisT[b+11:b+11+temp])//60))
+        #print('{}~{}까지 걸리는 시간 : {}분'.format(Dename, Arname,int(lisT[b+11:b+11+temp])//60))
         return int(int(lisT[b+11:b+11+temp]) + ArwaitTime)
 
 
@@ -125,8 +125,8 @@ if __name__ == '__main__':
         departure_time = int(startTime) #init 202111151700
         nextDepartureTime=departure_time
         FinalDepartureTime=0
-        print()
-        print('Case{} 출발시간 : {}'.format(i+1,departure_time))
+        #print()
+        #print('Case{} 출발시간 : {}'.format(i+1,departure_time))
         for j in range(numOfWayPoints): #경유지 개수 3 0/1/2
             
             earlierPosition=0
@@ -153,7 +153,7 @@ if __name__ == '__main__':
                     nextDepartureTime= int(str(nextDepartureTime//100) + str(c))
                 else:
                     nextDepartureTime=nextDepartureTime+minn
-                print('{}~{}가고 나서 다음 출발시간 : {}'.format(tempInfo[0][0],tempInfo[nowPosition][0],nextDepartureTime))
+                #print('{}~{}가고 나서 다음 출발시간 : {}'.format(tempInfo[0][0],tempInfo[nowPosition][0],nextDepartureTime))
                 continue
             
             if j!=0:
@@ -181,7 +181,7 @@ if __name__ == '__main__':
                 nextDepartureTime= int(str(nextDepartureTime//100) + str(c))
             else:
                 nextDepartureTime=nextDepartureTime+minn
-            print('{}~{}가고 나서 다음 출발시간 : {}'.format(tempInfo[earlierPosition][0],tempInfo[nowPosition][0],nextDepartureTime))
+            #print('{}~{}가고 나서 다음 출발시간 : {}'.format(tempInfo[earlierPosition][0],tempInfo[nowPosition][0],nextDepartureTime))
         #nowTime, Dename, Delongi, Deleti, Arname, Arlongi, Arleti, ArwaitTime
         earlierPosition=nowPosition
         nowPosition=len(tempInfo)-1
@@ -206,7 +206,7 @@ if __name__ == '__main__':
             nextDepartureTime=nextDepartureTime+minn
             
         FinalDepartureTime = nextDepartureTime
-        print('{}~{}가고 나서 다음 출발시간 : {}'.format(tempInfo[earlierPosition][0],tempInfo[nowPosition][0],FinalDepartureTime))
+        #print('{}~{}가고 나서 다음 출발시간 : {}'.format(tempInfo[earlierPosition][0],tempInfo[nowPosition][0],FinalDepartureTime))
         
         ArriveTimeList.append(FinalDepartureTime)
 
@@ -214,7 +214,7 @@ if __name__ == '__main__':
     #print(ArriveTimeList)
     indexOfMin=ArriveTimeList.index(min(ArriveTimeList))
     #print(indexOfMin)
-    print(len(totalList))
+    #print(len(totalList))
 
     candList=[]
     for j in range(0,len(totalList),numOfGap):
@@ -280,6 +280,7 @@ if __name__ == '__main__':
     print(xySequence)
     f = open("./public/data/routes_Seq.txt",'w')
     f.write(str(xySequence))
+    print(startTime, str(shortest))
     f = open("./public/data/arrivalTime.txt", 'w')
     f.write(startTime)
     f.write(str(shortest))

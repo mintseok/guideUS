@@ -12,7 +12,7 @@ xySequence=[]
 
 ######바꿔줘야하는애들#############
 #지역이름, 좌표, 좌표, 보낼시간(분)*60초
-
+'''
 tempInfo=[['오목공원', 126.87342746092098, 37.52795101285814,0 ],
            ['한강시민공원', 126.91721575454739, 37.534300329910174,40*60],
            ['타임스퀘어', 126.90348334722331, 37.51706045642019,50*60],
@@ -20,6 +20,14 @@ tempInfo=[['오목공원', 126.87342746092098, 37.52795101285814,0 ],
            ['양정고', 126.88665216380912, 37.53517528749371,20*60],
            ['여의도IFC', 126.9258950594651, 37.524722548427626,0]
            ]
+'''
+tempInfo=[['압구정로데오거리', 127.039152029523, 37.5267558230172, 0], 
+        ['하나은행 용산역지점', 126.96443556360899,37.5286310416737, 600], 
+        ['야탑역 수인분당선', 127.128742990837, 37.4113736407028, 600],
+        ['대치역 3호선', 127.06320340952898, 37.4944966528582, 600], 
+        ['세븐일레븐 오리역점', 127.10927772753149, 37.33932567183978, 600], 
+        ['강남역사거리', 127.027638348418, 37.4979521720737, 0]
+        ]
 '''
 tempInfo=[['오목교', 126.87549134655843,37.52713456874572,0 ],
            ['파리공원',126.87789791688866,37.53477114356204,40*60],
@@ -76,7 +84,7 @@ def calNextDepartureTime(nowTime, Dename, Delongi, Deleti, Arname, Arlongi, Arle
     REST_API_KEY = "e1b38c8743ebf6b94b9fb2fb06bda8ff" # trial: e1b38c8743ebf6b94b9fb2fb06bda8ff original: 31f79d70f280d203655c06f29b46f395
     url = "https://apis-navi.kakaomobility.com/v1/future/directions"
     header = {"Authorization": 'KakaoAK ' + REST_API_KEY}
-    payload = {'departure_time':'202111141605',
+    payload = {'departure_time':'202111141005',
                 'origin':'126.87549134655843,37.52713456874572,name=오목교',
                 'destination':'126.87789791688866,37.53477114356204,name=파리공원',
                 'priority':'TIME',
@@ -91,8 +99,9 @@ def calNextDepartureTime(nowTime, Dename, Delongi, Deleti, Arname, Arlongi, Arle
     payload['destination']='{},{},name={}'.format(Arlongi,Arleti,Arname)
     
     response =requests.get(url, params=payload, headers=header)
-    
+    print(nowTime, Dename, Delongi, Deleti, Arname, Arlongi, Arleti, ArwaitTime)
     lisT = str(response.json()["routes"])
+    print(lisT)
     lisT2=str(response.json())
     totalList.append(lisT2)
     s = 'duration'
@@ -104,14 +113,15 @@ def calNextDepartureTime(nowTime, Dename, Delongi, Deleti, Arname, Arlongi, Arle
             if(i=='}'):
                 break
             temp+=1
-    #print(lisT[b+11:b+11+temp])
+    print(lisT[b+11:b+11+temp])
+    print("HI")
     #출발지에서 도착지까지의 거리 + 도착지에서 보내는 시간을 return 함
     #print('{}~{}까지 걸리는 시간 : {}분'.format(Dename, Arname,int(lisT[b+11:b+11+temp])//60))
-    return int(int(lisT[b+11:b+11+temp]) + ArwaitTime)
+    return int(float(int(lisT[b+11:b+11+temp]) + ArwaitTime))
 
 
 for i in range(numberOfPermutaion): #0~5 만들수있는 순열의 개수 6
-    departure_time = 202111151700 #init
+    departure_time = 202111151100 #init
     nextDepartureTime=departure_time
     FinalDepartureTime=0
     #print()

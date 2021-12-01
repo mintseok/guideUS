@@ -11,22 +11,18 @@ router.get('/', (request, response) => {
     fs.unlink("./public/data/routes_1.txt", (err1)=>{
         if(err1){
             console.log(err1);
-        }
-        fs.unlink("./public/data/routes_Seq.txt", (err2)=>{
-            if(err2){
-                console.log(err2);
-            }
-            fs.unlink("./public/data/arrivalTime.txt", (err3)=>{
-                if(err3){
-                    console.log(err3);
-                }
-                var html = template.HTML_COPY();
-                //var html = template.HTML();
-                response.send(html);
-            });
-
-        });
-    });
+        }});
+    fs.unlink("./public/data/routes_Seq.txt", (err2)=>{
+        if(err2){
+            console.log(err2);
+        }})
+    fs.unlink("./public/data/arrivalTime.txt", (err3)=>{
+        if(err3){
+            console.log(err3);
+        }})
+    var html = template.HTML_COPY();
+    //var html = template.HTML();
+    response.send(html);
 });
 
 router.post('/processing', (request, response) => {    
@@ -48,6 +44,7 @@ router.post('/processing', (request, response) => {
     const resultpy = spawn('python', param); // 파이썬 실행
     resultpy.stdout.on('data', (result)=>{
         utf8Str = iconv.decode(result, 'euc-kr');
+        console.log(utf8Str);
     });
     resultpy.on('close', (code) => {
         console.log("done");
