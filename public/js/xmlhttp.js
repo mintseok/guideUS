@@ -65,7 +65,7 @@ function sendJSON() {
 }
 
 async function getRoads(realText) {
-    return fetch('http://localhost:3000/processing', {
+    return fetch('./processing', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
