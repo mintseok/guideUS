@@ -58,7 +58,8 @@ router.post('/processing', (request, response) => {
 });
 
 router.get('/result', (request, response) => {
-    fs.readFile('public/data/arrivalTime.txt', 'utf8', function(err, data){
+    fs.readFile('./public/data/arrivalTime.txt', 'utf8', function(err, data){
+        if (err) throw(err);
         //console.log(data);
         startTime = data.slice(0, 12);
         endTime = data.slice(12, 24);

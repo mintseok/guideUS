@@ -271,11 +271,11 @@ if __name__ == '__main__':
             
 
     #print(count)
-    print(vertex)
+    #print(vertex)
         
     f = open("./public/data/routes_1.txt",'w')
     f.write(str(vertex))
-    print()
+    #print()
     #print(IndexSequence)
     print(xySequence)
     f = open("./public/data/routes_Seq.txt",'w')
